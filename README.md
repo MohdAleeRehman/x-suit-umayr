@@ -13,8 +13,7 @@ Production-ready monorepo for the X Suite real estate platform.
 
 - backend: Express + MongoDB Atlas API (single superadmin model)
 - frontend: Next.js App Router UI (Sale, Rent, Property, Records)
-- docx: copy of root markdown documentation files
-- root docs: discovery and architecture references
+- X Suite V6.html: legacy reference HTML snapshot
 
 ## Core Features
 
@@ -116,12 +115,8 @@ npm --prefix frontend run build
 ## Phase 9 Deliverables (Repository)
 
 - Frontend Jest/RTL test setup and smoke tests
-- Migration and cutover runbook
-- Deployment verification checklist
-
-## Documentation
-
-Primary architecture and discovery docs are at project root and duplicated under `docx/` as requested.
+- Migration and cutover implementation readiness in current codebase
+- Deployment verification support through Render/Vercel configs
 
 ## Security Note
 

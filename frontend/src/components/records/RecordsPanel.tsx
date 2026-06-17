@@ -107,7 +107,7 @@ export function RecordsPanel({ type }: Props) {
       ) : null}
 
       <div className="mt-5 overflow-x-auto">
-        <table className="w-full min-w-[700px] border-collapse text-sm">
+        <table className="w-full min-w-175 border-collapse text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-left text-(--ink-soft)">
               <th className="pb-2">Title</th>
