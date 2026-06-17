@@ -1,0 +1,44 @@
+{
+  "name": "x-suite-backend",
+  "version": "1.0.0",
+  "description": "X Suite Real Estate Calculator - Backend API",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "NODE_ENV=test node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
+    "test:watch": "NODE_ENV=test node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
+    "lint": "eslint src/"
+  },
+  "keywords": [
+    "real-estate",
+    "calculator",
+    "api",
+    "express",
+    "mongodb"
+  ],
+  "author": "X Suite Development",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.3.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "joi": "^17.10.0",
+    "express-rate-limit": "^7.0.0",
+    "compression": "^1.7.4",
+    "helmet": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.50.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: x-suite-backend
+    runtime: node
+    plan: starter
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CORS_ORIGIN
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SUPERADMIN_USERNAME
+        sync: false
+      - key: SUPERADMIN_PASSWORD
+        sync: false
