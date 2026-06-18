@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useRecords } from "@/hooks/useRecords";
 import { shareRecordPdf } from "@/lib/pdfShare";
-import { RecordType } from "@/types/records";
+import { RecordType, SavedRecord } from "@/types/records";
+import { QuickLookModal } from "@/components/records/QuickLookModal";
 
 type Props = {
   type?: RecordType;
@@ -29,6 +30,7 @@ export function RecordsPanel({ type }: Props) {
   const [deletingId, setDeletingId] = useState<string>("");
   const [sharingId, setSharingId] = useState<string>("");
   const [shareError, setShareError] = useState("");
+  const [quickLookRecord, setQuickLookRecord] = useState<SavedRecord | null>(null);
 
   const pageStart = total === 0 ? 0 : skip + 1;
   const pageEnd = Math.min(skip + records.length, total);
@@ -149,6 +151,13 @@ export function RecordsPanel({ type }: Props) {
                         <Button
                           variant="secondary"
                           className="h-9"
+                          onClick={() => setQuickLookRecord(record)}
+                        >
+                          Quick Look
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          className="h-9"
                           disabled={sharingId === record._id}
                           onClick={async () => {
                             try {
@@ -190,6 +199,8 @@ export function RecordsPanel({ type }: Props) {
           </tbody>
         </table>
       </div>
+
+      <QuickLookModal record={quickLookRecord} onClose={() => setQuickLookRecord(null)} />
     </section>
   );
 }

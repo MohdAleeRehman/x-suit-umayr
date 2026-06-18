@@ -16,6 +16,8 @@ export function usePropertyForm() {
       const next = {
         ...prev,
         [key]:
+          key === "propArchetype" ||
+          key === "propHandoverVal" ||
           key === "pBuilding" ||
           key === "pUnit" ||
           key === "pLevel" ||

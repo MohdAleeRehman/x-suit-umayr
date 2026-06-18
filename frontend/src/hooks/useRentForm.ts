@@ -22,19 +22,25 @@ export function useRentForm() {
   };
 
   const quickMetrics = useMemo(() => {
-    const sewaFee = form.rentAnnual * (form.rentSewa / 100);
+    const sewaFee = form.rentSewa;
+    const securityPct = form.rentFurnished === "furnished" ? 0.1 : 0.05;
     const commission =
       form.rcType === "pct" ? form.rentAnnual * (form.rcVal / 100) : form.rcVal;
     const firstCheque = form.rentCheques > 0 ? form.rentAnnual / form.rentCheques : 0;
     const attestationFee = form.rentAnnual * 0.04;
-    const securityDeposit = form.rentAnnual * 0.05;
+    const securityDeposit = form.rentAnnual * securityPct;
+    const commissionWithVat = commission * 1.05;
+    const immediateCash = firstCheque + attestationFee + sewaFee + securityDeposit + commissionWithVat;
 
     return {
       sewaFee,
       commission,
+      commissionWithVat,
       firstCheque,
       attestationFee,
       securityDeposit,
+      securityPct,
+      immediateCash,
     };
   }, [form]);
 

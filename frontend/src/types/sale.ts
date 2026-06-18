@@ -1,4 +1,11 @@
-export type SalePaidType = "pct" | "fixed";
+export type SalePaidType = "pct" | "amt";
+
+export type UtilityPayerMap = {
+  Water: "buyer" | "seller";
+  Gas: "buyer" | "seller";
+  Elec: "buyer" | "seller";
+  Fire: "buyer" | "seller";
+};
 
 export type SaleFormData = {
   origPrice: number;
@@ -22,6 +29,7 @@ export type SaleFormData = {
   uGas: number;
   uElec: number;
   uFire: number;
+  payerMap: UtilityPayerMap;
 };
 
 export const SALE_DEFAULTS: SaleFormData = {
@@ -32,12 +40,12 @@ export const SALE_DEFAULTS: SaleFormData = {
   paidType: "pct",
   paidVal: 25,
   devBal: 684750,
-  dldPct: 4.5,
+  dldPct: 2,
   sldBasePct: 2,
-  sldSellPct: 2,
-  nocFee: 100,
-  spaFee: 4000,
-  titleDeed: 500,
+  sldSellPct: 1,
+  nocFee: 5250,
+  spaFee: 1250,
+  titleDeed: 520,
   bcType: "pct",
   bcVal: 2,
   scType: "pct",
@@ -46,4 +54,10 @@ export const SALE_DEFAULTS: SaleFormData = {
   uGas: 0,
   uElec: 0,
   uFire: 0,
+  payerMap: {
+    Water: "buyer",
+    Gas: "buyer",
+    Elec: "buyer",
+    Fire: "buyer",
+  },
 };

@@ -1,9 +1,11 @@
 export type PropertyFormData = {
+  propArchetype: "Apartment" | "Villa";
+  propHandoverVal: "Yes" | "No";
   pBuilding: string;
   pUnit: string;
   pLevel: string;
   pView: string;
-  pType: "Apartment" | "Villa" | "Townhouse" | "C2";
+  pType: string;
   pBeds: number;
   pBaths: number;
   pLiving: number;
@@ -21,6 +23,8 @@ export type PropertyFormData = {
 };
 
 export const PROPERTY_DEFAULTS: PropertyFormData = {
+  propArchetype: "Villa",
+  propHandoverVal: "Yes",
   pBuilding: "Robinia",
   pUnit: "131",
   pLevel: "1",

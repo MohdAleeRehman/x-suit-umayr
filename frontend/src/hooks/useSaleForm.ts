@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SALE_DEFAULTS, SaleFormData } from "@/types/sale";
+import { SALE_DEFAULTS, SaleFormData, UtilityPayerMap } from "@/types/sale";
 
 const toNumber = (value: string): number => {
   const parsed = Number(value);
@@ -36,6 +36,16 @@ export function useSaleForm() {
     });
   };
 
+  const updatePayer = <K extends keyof UtilityPayerMap>(key: K, payer: UtilityPayerMap[K]) => {
+    setForm((prev) => ({
+      ...prev,
+      payerMap: {
+        ...prev.payerMap,
+        [key]: payer,
+      },
+    }));
+  };
+
   const quickMetrics = useMemo(() => {
     const grossGain = form.sellPrice - form.origPrice;
     const roi = form.origPrice > 0 ? (grossGain / form.origPrice) * 100 : 0;
@@ -47,5 +57,5 @@ export function useSaleForm() {
 
   const reset = () => setForm(SALE_DEFAULTS);
 
-  return { form, updateField, reset, quickMetrics };
+  return { form, updateField, updatePayer, reset, quickMetrics };
 }

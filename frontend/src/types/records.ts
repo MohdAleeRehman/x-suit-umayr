@@ -9,3 +9,10 @@ export type SavedRecord = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type QuickLookRecord = SavedRecord & {
+  computed: {
+    primary: Array<{ label: string; value: string }>;
+    breakdown: Array<{ label: string; value: string }>;
+  };
+};

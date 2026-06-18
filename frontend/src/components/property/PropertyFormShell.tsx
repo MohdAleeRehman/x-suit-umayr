@@ -36,22 +36,21 @@ export function PropertyFormShell() {
             <InputField label="Unit" value={form.pUnit} onChange={(v) => updateField("pUnit", v)} />
             <InputField label="Level" value={form.pLevel} onChange={(v) => updateField("pLevel", v)} />
             <InputField label="View" value={form.pView} onChange={(v) => updateField("pView", v)} />
+            <SelectField
+              label="Property Layout Archetype"
+              value={form.propArchetype}
+              onChange={(v) => updateField("propArchetype", v)}
+              options={[
+                { label: "Apartment", value: "Apartment" },
+                { label: "Villa / Townhouse / Land", value: "Villa" },
+              ]}
+            />
           </div>
         </FormSection>
 
         <FormSection title="Configuration Dimensions">
           <div className="grid gap-4 md:grid-cols-3">
-            <SelectField
-              label="Property Type"
-              value={form.pType}
-              onChange={(v) => updateField("pType", v)}
-              options={[
-                { label: "Apartment", value: "Apartment" },
-                { label: "Villa", value: "Villa" },
-                { label: "Townhouse", value: "Townhouse" },
-                { label: "C2", value: "C2" },
-              ]}
-            />
+            <InputField label="Type Designation" value={form.pType} onChange={(v) => updateField("pType", v)} />
             <InputField label="Bedrooms" type="number" value={form.pBeds} onChange={(v) => updateField("pBeds", v)} min={0} />
             <InputField label="Bathrooms" type="number" value={form.pBaths} onChange={(v) => updateField("pBaths", v)} min={0} />
             <InputField label="Living Rooms" type="number" value={form.pLiving} onChange={(v) => updateField("pLiving", v)} min={0} />
@@ -62,7 +61,7 @@ export function PropertyFormShell() {
 
         <FormSection title="Area Sizing and Financial Metrics">
           <div className="grid gap-4 md:grid-cols-3">
-            <InputField label="Plot Area (sqft)" type="number" value={form.pPlotArea} onChange={(v) => updateField("pPlotArea", v)} min={0} />
+            {form.propArchetype === "Villa" ? <InputField label="Plot Area (sqft)" type="number" value={form.pPlotArea} onChange={(v) => updateField("pPlotArea", v)} min={0} /> : null}
             <InputField label="Sale Area (sqft)" type="number" value={form.pSaleArea} onChange={(v) => updateField("pSaleArea", v)} min={0} />
             <InputField label="Market Price (AED)" type="number" value={form.pPrice} onChange={(v) => updateField("pPrice", v)} min={0} />
             <InputField label="Price per sqft" type="number" value={form.pPriceSqft.toFixed(2)} onChange={() => {}} disabled />
@@ -76,6 +75,15 @@ export function PropertyFormShell() {
             <InputField label="Occupancy Status" value={form.pStatus} onChange={(v) => updateField("pStatus", v)} />
             <InputField label="Paid to Owner" value={form.pPaidOwner} onChange={(v) => updateField("pPaidOwner", v)} />
             <InputField label="Outstanding Amount" value={form.pLeft} onChange={(v) => updateField("pLeft", v)} />
+            <SelectField
+              label="Handover"
+              value={form.propHandoverVal}
+              onChange={(v) => updateField("propHandoverVal", v)}
+              options={[
+                { label: "Yes", value: "Yes" },
+                { label: "No", value: "No" },
+              ]}
+            />
           </div>
         </FormSection>
 
