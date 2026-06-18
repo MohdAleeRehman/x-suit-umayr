@@ -12,10 +12,29 @@ export function usePropertyForm() {
   const [form, setForm] = useState<PropertyFormData>(PROPERTY_DEFAULTS);
 
   const updateField = <K extends keyof PropertyFormData>(key: K, raw: string) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: key === "pBuilding" || key === "pUnit" || key === "pType" ? raw : toNumber(raw),
-    } as PropertyFormData));
+    setForm((prev) => {
+      const next = {
+        ...prev,
+        [key]:
+          key === "pBuilding" ||
+          key === "pUnit" ||
+          key === "pLevel" ||
+          key === "pView" ||
+          key === "pType" ||
+          key === "pBalcony" ||
+          key === "pParking" ||
+          key === "pStatus" ||
+          key === "pPaidOwner" ||
+          key === "pLeft"
+            ? raw
+            : toNumber(raw),
+      } as PropertyFormData;
+
+      next.pPriceSqft = next.pSaleArea > 0 ? next.pPrice / next.pSaleArea : 0;
+      next.pReturn = next.pPrice > 0 ? (next.pExpectRent / next.pPrice) * 100 : 0;
+
+      return next;
+    });
   };
 
   const quickMetrics = useMemo(() => {

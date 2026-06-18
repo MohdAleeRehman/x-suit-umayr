@@ -16,7 +16,11 @@ export function useSaleForm() {
       const next = {
         ...prev,
         [key]:
-          key === "propStatus" || key === "paidType" || key === "bcType" || key === "scType"
+          key === "propStatus" ||
+          key === "hasUtil" ||
+          key === "paidType" ||
+          key === "bcType" ||
+          key === "scType"
             ? raw
             : toNumber(raw),
       } as SaleFormData;

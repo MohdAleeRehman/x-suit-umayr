@@ -4,6 +4,7 @@ export type SaleFormData = {
   origPrice: number;
   sellPrice: number;
   propStatus: "offplan" | "Ready";
+  hasUtil: "yes" | "no";
   paidType: SalePaidType;
   paidVal: number;
   devBal: number;
@@ -17,12 +18,17 @@ export type SaleFormData = {
   bcVal: number;
   scType: SalePaidType;
   scVal: number;
+  uWater: number;
+  uGas: number;
+  uElec: number;
+  uFire: number;
 };
 
 export const SALE_DEFAULTS: SaleFormData = {
   origPrice: 913000,
   sellPrice: 1100000,
   propStatus: "offplan",
+  hasUtil: "yes",
   paidType: "pct",
   paidVal: 25,
   devBal: 684750,
@@ -36,4 +42,8 @@ export const SALE_DEFAULTS: SaleFormData = {
   bcVal: 2,
   scType: "pct",
   scVal: 2,
+  uWater: 0,
+  uGas: 0,
+  uElec: 0,
+  uFire: 0,
 };

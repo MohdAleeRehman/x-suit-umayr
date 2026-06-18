@@ -12,7 +12,7 @@ export default function SalePage() {
     <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
       <AppHeader
         title="For Sale Module"
-        subtitle="Week 5 componentized shell"
+        subtitle="Secondary market pricing and transfer fee model"
         onLogout={logout}
       />
       <SaleFormShell />

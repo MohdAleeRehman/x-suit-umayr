@@ -26,11 +26,15 @@ export function useRentForm() {
     const commission =
       form.rcType === "pct" ? form.rentAnnual * (form.rcVal / 100) : form.rcVal;
     const firstCheque = form.rentCheques > 0 ? form.rentAnnual / form.rentCheques : 0;
+    const attestationFee = form.rentAnnual * 0.04;
+    const securityDeposit = form.rentAnnual * 0.05;
 
     return {
       sewaFee,
       commission,
       firstCheque,
+      attestationFee,
+      securityDeposit,
     };
   }, [form]);
 

@@ -12,7 +12,7 @@ export default function PropertyPage() {
     <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
       <AppHeader
         title="Property Details Module"
-        subtitle="Week 6 API integration"
+        subtitle="Identity, configuration, pricing, and return profile"
         onLogout={logout}
       />
       <PropertyFormShell />

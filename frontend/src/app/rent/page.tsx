@@ -12,7 +12,7 @@ export default function RentPage() {
     <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
       <AppHeader
         title="For Rent Module"
-        subtitle="Week 6 API integration"
+        subtitle="Tenant move-in, cheque schedule, and deposit model"
         onLogout={logout}
       />
       <RentFormShell />
