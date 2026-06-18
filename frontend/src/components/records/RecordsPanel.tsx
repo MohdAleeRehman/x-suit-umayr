@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useRecords } from "@/hooks/useRecords";
+import { api } from "@/lib/api";
 import { RecordType } from "@/types/records";
 
 type Props = {
@@ -26,6 +27,8 @@ export function RecordsPanel({ type }: Props) {
   } = useRecords(type);
   const [query, setQuery] = useState("");
   const [deletingId, setDeletingId] = useState<string>("");
+  const [sharingId, setSharingId] = useState<string>("");
+  const [shareError, setShareError] = useState("");
 
   const pageStart = total === 0 ? 0 : skip + 1;
   const pageEnd = Math.min(skip + records.length, total);
@@ -106,8 +109,14 @@ export function RecordsPanel({ type }: Props) {
         </p>
       ) : null}
 
+      {shareError ? (
+        <p className="mt-4 rounded-lg border border-amber-100 bg-amber-50 px-4 py-2 text-sm text-amber-700">
+          {shareError}
+        </p>
+      ) : null}
+
       <div className="mt-5 overflow-x-auto">
-        <table className="w-full min-w-175 border-collapse text-sm">
+        <table className="w-full min-w-[700px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-left text-(--ink-soft)">
               <th className="pb-2">Title</th>
@@ -136,21 +145,47 @@ export function RecordsPanel({ type }: Props) {
                       {new Date(record.createdAt).toLocaleString("en-AE")}
                     </td>
                     <td className="py-3">
-                      <Button
-                        variant="secondary"
-                        className="h-9"
-                        disabled={deletingId === record._id}
-                        onClick={async () => {
-                          try {
-                            setDeletingId(record._id);
-                            await remove(record._id);
-                          } finally {
-                            setDeletingId("");
-                          }
-                        }}
-                      >
-                        {deletingId === record._id ? "Deleting..." : "Delete"}
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="secondary"
+                          className="h-9"
+                          disabled={sharingId === record._id}
+                          onClick={async () => {
+                            try {
+                              setShareError("");
+                              setSharingId(record._id);
+                              const response = await api.generateSharePayload({
+                                moduleType: record.type,
+                                title: record.title,
+                                summary: `Created ${new Date(record.createdAt).toLocaleDateString("en-AE")}`,
+                                recordId: record._id,
+                              });
+                              window.open(response.data.whatsappUrl, "_blank", "noopener,noreferrer");
+                            } catch {
+                              setShareError("Unable to generate share link right now.");
+                            } finally {
+                              setSharingId("");
+                            }
+                          }}
+                        >
+                          {sharingId === record._id ? "Sharing..." : "Share"}
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          className="h-9"
+                          disabled={deletingId === record._id}
+                          onClick={async () => {
+                            try {
+                              setDeletingId(record._id);
+                              await remove(record._id);
+                            } finally {
+                              setDeletingId("");
+                            }
+                          }}
+                        >
+                          {deletingId === record._id ? "Deleting..." : "Delete"}
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))

@@ -27,6 +27,13 @@ type GetRecordsOptions = {
   limit?: number;
 };
 
+type SharePayloadRequest = {
+  moduleType: RecordType;
+  title: string;
+  summary?: string;
+  recordId?: string;
+};
+
 const request = async <T>(path: string, init?: RequestInit): Promise<T> => {
   const token = authStore.getToken();
 
@@ -92,4 +99,18 @@ export const api = {
       `/api/records/search?${params.toString()}`
     );
   },
+
+  generateSharePayload: (payload: SharePayloadRequest) =>
+    request<{
+      success: boolean;
+      message: string;
+      data: {
+        whatsappUrl: string;
+        link: string;
+        pdf: { status: string; storage: string; fileUrl: string | null };
+      };
+    }>("/api/pdf/share-payload", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
 };

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { StatCard } from "@/components/ui/StatCard";
 import { Button } from "@/components/ui/Button";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
@@ -12,7 +13,7 @@ export default function DashboardPage() {
   const { summary } = useRecordsSummary(Boolean(user));
 
   return (
-    <main className="flex min-h-screen flex-col px-6 py-8 md:px-10">
+    <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
       <AppHeader title="Dashboard" subtitle="Single superadmin access" onLogout={logout} />
 
       <section className="mx-auto mt-4 grid w-full max-w-5xl gap-2 sm:grid-cols-2 lg:grid-cols-4">
@@ -53,6 +54,8 @@ export default function DashboardPage() {
           {error}
         </p>
       ) : null}
+
+      <MobileBottomNav />
     </main>
   );
 }
