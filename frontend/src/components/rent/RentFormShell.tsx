@@ -25,7 +25,7 @@ export function RentFormShell() {
   };
 
   return (
-    <section className="mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
+    <section className="card card-outline card-danger mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
       <h2 className="text-xl font-bold text-foreground">Rent Calculator</h2>
       <p className="mt-1 text-sm text-(--ink-soft)">Sharjah rental cash outflow and compliance summary flow.</p>
 

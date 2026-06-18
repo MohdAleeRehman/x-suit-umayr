@@ -21,7 +21,7 @@ export function AppHeader({ title, subtitle, onLogout }: Props) {
       : null;
 
   return (
-    <header className="mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border border-white/60 bg-(--panel) px-4 py-4 shadow-[0_18px_50px_rgba(28,36,48,0.12)] sm:px-5 md:flex-row md:items-center md:justify-between">
+    <header className="card card-outline card-danger mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border border-white/60 bg-(--panel) px-4 py-4 shadow-[0_18px_50px_rgba(28,36,48,0.12)] sm:px-5 md:flex-row md:items-center md:justify-between">
       <div className="min-w-0">
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
           X Suite Control

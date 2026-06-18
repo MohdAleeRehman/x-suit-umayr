@@ -1,7 +1,7 @@
 export default function OfflinePage() {
   return (
     <main className="flex min-h-screen items-center justify-center px-6 py-8 md:px-10">
-      <section className="w-full max-w-2xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
+      <section className="card card-outline card-danger w-full max-w-2xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
           X Suite
         </p>
