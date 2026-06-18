@@ -1,42 +1,37 @@
 import { memo } from "react";
 
+type Option = {
+  label: string;
+  value: string;
+};
+
 type Props = {
   label: string;
-  value: string | number;
+  value: string;
   onChange: (value: string) => void;
-  type?: "text" | "number" | "password" | "date";
-  placeholder?: string;
-  min?: number;
-  step?: number;
+  options: Option[];
   disabled?: boolean;
 };
 
-function InputFieldBase({
-  label,
-  value,
-  onChange,
-  type = "text",
-  placeholder,
-  min,
-  step,
-  disabled,
-}: Props) {
+function SelectFieldBase({ label, value, onChange, options, disabled }: Props) {
   return (
     <label className="block">
       <span className="mb-2 block text-sm font-semibold text-foreground">{label}</span>
-      <input
-        type={type}
+      <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder}
-        min={min}
-        step={step}
         disabled={disabled}
         className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-foreground"
-      />
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </label>
   );
 }
 
-export const InputField = memo(InputFieldBase);
-InputField.displayName = "InputField";
+export const SelectField = memo(SelectFieldBase);
+SelectField.displayName = "SelectField";

@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { InputField } from "@/components/ui/InputField";
+import { SelectField } from "@/components/ui/SelectField";
 import { Button } from "@/components/ui/Button";
 import { useSaleForm } from "@/hooks/useSaleForm";
 import { api } from "@/lib/api";
@@ -36,12 +37,21 @@ export function SaleFormShell() {
 
   return (
     <section className="mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
-      <h2 className="text-xl font-bold text-foreground">Sale Calculator (Week 5 Shell)</h2>
+      <h2 className="text-xl font-bold text-foreground">Sale Calculator</h2>
       <p className="mt-1 text-sm text-(--ink-soft)">
-        Componentized form foundation is ready. Full parity formulas will be finalized in Week 6.
+        End-to-end sale record flow with improved field parity and module-level save support.
       </p>
 
       <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={saveRecord}>
+        <SelectField
+          label="Property Status"
+          value={form.propStatus}
+          onChange={(v) => updateField("propStatus", v)}
+          options={[
+            { label: "Offplan", value: "offplan" },
+            { label: "Ready", value: "Ready" },
+          ]}
+        />
         <InputField
           label="Original Buying Price"
           type="number"
@@ -56,13 +66,14 @@ export function SaleFormShell() {
           onChange={(v) => updateField("sellPrice", v)}
           min={0}
         />
-        <InputField
-          label="Paid Type (1=pct, 2=fixed)"
-          type="number"
-          value={form.paidType === "pct" ? 1 : 2}
-          onChange={(v) => updateField("paidType", Number(v) === 2 ? "fixed" : "pct")}
-          min={1}
-          step={1}
+        <SelectField
+          label="Amount Paid Type"
+          value={form.paidType}
+          onChange={(v) => updateField("paidType", v)}
+          options={[
+            { label: "Percent", value: "pct" },
+            { label: "Fixed Amount", value: "fixed" },
+          ]}
         />
         <InputField
           label="Paid Value"
@@ -85,6 +96,59 @@ export function SaleFormShell() {
           onChange={(v) => updateField("dldPct", v)}
           min={0}
           step={0.1}
+        />
+        <InputField
+          label="NOC Fee"
+          type="number"
+          value={form.nocFee}
+          onChange={(v) => updateField("nocFee", v)}
+          min={0}
+        />
+        <InputField
+          label="SPA Fee"
+          type="number"
+          value={form.spaFee}
+          onChange={(v) => updateField("spaFee", v)}
+          min={0}
+        />
+        <InputField
+          label="Title Deed"
+          type="number"
+          value={form.titleDeed}
+          onChange={(v) => updateField("titleDeed", v)}
+          min={0}
+        />
+        <SelectField
+          label="Buyer Commission Type"
+          value={form.bcType}
+          onChange={(v) => updateField("bcType", v)}
+          options={[
+            { label: "Percent", value: "pct" },
+            { label: "Fixed Amount", value: "fixed" },
+          ]}
+        />
+        <InputField
+          label="Buyer Commission Value"
+          type="number"
+          value={form.bcVal}
+          onChange={(v) => updateField("bcVal", v)}
+          min={0}
+        />
+        <SelectField
+          label="Seller Commission Type"
+          value={form.scType}
+          onChange={(v) => updateField("scType", v)}
+          options={[
+            { label: "Percent", value: "pct" },
+            { label: "Fixed Amount", value: "fixed" },
+          ]}
+        />
+        <InputField
+          label="Seller Commission Value"
+          type="number"
+          value={form.scVal}
+          onChange={(v) => updateField("scVal", v)}
+          min={0}
         />
 
         <div className="md:col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">

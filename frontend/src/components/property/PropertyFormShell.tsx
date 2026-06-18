@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { InputField } from "@/components/ui/InputField";
+import { SelectField } from "@/components/ui/SelectField";
 import { Button } from "@/components/ui/Button";
 import { usePropertyForm } from "@/hooks/usePropertyForm";
 import { api } from "@/lib/api";
@@ -30,6 +31,15 @@ export function PropertyFormShell() {
       <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={saveRecord}>
         <InputField label="Building" value={form.pBuilding} onChange={(v) => updateField("pBuilding", v)} />
         <InputField label="Unit" value={form.pUnit} onChange={(v) => updateField("pUnit", v)} />
+        <SelectField
+          label="Property Type"
+          value={form.pType}
+          onChange={(v) => updateField("pType", v)}
+          options={[
+            { label: "Apartment", value: "Apartment" },
+            { label: "Villa", value: "Villa" },
+          ]}
+        />
         <InputField label="Beds" type="number" value={form.pBeds} onChange={(v) => updateField("pBeds", v)} min={0} />
         <InputField label="Baths" type="number" value={form.pBaths} onChange={(v) => updateField("pBaths", v)} min={0} />
         <InputField label="Sale Area (sqft)" type="number" value={form.pSaleArea} onChange={(v) => updateField("pSaleArea", v)} min={0} />
