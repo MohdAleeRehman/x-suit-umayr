@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useRecords } from "@/hooks/useRecords";
-import { api } from "@/lib/api";
+import { shareRecordPdf } from "@/lib/pdfShare";
 import { RecordType } from "@/types/records";
 
 type Props = {
@@ -34,7 +34,7 @@ export function RecordsPanel({ type }: Props) {
   const pageEnd = Math.min(skip + records.length, total);
 
   return (
-    <section className="mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
+    <section className="card card-outline card-danger mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-xl font-bold text-foreground">Saved Records</h2>
@@ -116,7 +116,7 @@ export function RecordsPanel({ type }: Props) {
       ) : null}
 
       <div className="mt-5 overflow-x-auto">
-        <table className="w-full min-w-[700px] border-collapse text-sm">
+        <table className="table w-full min-w-[640px] border-collapse text-sm md:min-w-[700px]">
           <thead>
             <tr className="border-b border-slate-200 text-left text-(--ink-soft)">
               <th className="pb-2">Title</th>
@@ -154,21 +154,18 @@ export function RecordsPanel({ type }: Props) {
                             try {
                               setShareError("");
                               setSharingId(record._id);
-                              const response = await api.generateSharePayload({
-                                moduleType: record.type,
-                                title: record.title,
-                                summary: `Created ${new Date(record.createdAt).toLocaleDateString("en-AE")}`,
-                                recordId: record._id,
-                              });
-                              window.open(response.data.whatsappUrl, "_blank", "noopener,noreferrer");
+                              const result = await shareRecordPdf(record);
+                              if (result === "downloaded") {
+                                setShareError("PDF generated and downloaded. Use WhatsApp attachment to send this file.");
+                              }
                             } catch {
-                              setShareError("Unable to generate share link right now.");
+                              setShareError("Unable to generate or share PDF right now.");
                             } finally {
                               setSharingId("");
                             }
                           }}
                         >
-                          {sharingId === record._id ? "Sharing..." : "Share"}
+                          {sharingId === record._id ? "Preparing PDF..." : "Share PDF"}
                         </Button>
                         <Button
                           variant="secondary"

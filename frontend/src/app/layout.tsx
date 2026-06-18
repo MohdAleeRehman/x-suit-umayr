@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Syne, JetBrains_Mono } from "next/font/google";
+import "admin-lte/dist/css/adminlte.min.css";
 import "./globals.css";
 import { PWARegister } from "@/components/pwa/PWARegister";
 
