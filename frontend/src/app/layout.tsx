@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Source_Sans_3, JetBrains_Mono } from "next/font/google";
 import "admin-lte/dist/css/adminlte.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 import { PWARegister } from "@/components/pwa/PWARegister";
 
@@ -46,6 +48,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <PWARegister />
         {children}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/js/adminlte.min.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -1,22 +1,20 @@
 "use client";
 
-import { AppHeader } from "@/components/layout/AppHeader";
-import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { AdminShell } from "@/components/layout/AdminShell";
 import { SaleFormShell } from "@/components/sale/SaleFormShell";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
 
 export default function SalePage() {
-  const { logout } = useAuthGuard();
+  const { user, logout } = useAuthGuard();
 
   return (
-    <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
-      <AppHeader
-        title="For Sale Module"
-        subtitle="Secondary market pricing and transfer fee model"
-        onLogout={logout}
-      />
+    <AdminShell
+      pageTitle="For Sale Module"
+      pageSubtitle="Secondary market pricing and transfer fee model"
+      user={user}
+      onLogout={logout}
+    >
       <SaleFormShell />
-      <MobileBottomNav />
-    </main>
+    </AdminShell>
   );
 }

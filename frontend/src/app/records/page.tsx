@@ -1,22 +1,20 @@
 "use client";
 
-import { AppHeader } from "@/components/layout/AppHeader";
-import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { AdminShell } from "@/components/layout/AdminShell";
 import { RecordsPanel } from "@/components/records/RecordsPanel";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
 
 export default function RecordsPage() {
-  const { logout } = useAuthGuard();
+  const { user, logout } = useAuthGuard();
 
   return (
-    <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
-      <AppHeader
-        title="Records History"
-        subtitle="Search, review, and delete saved records"
-        onLogout={logout}
-      />
+    <AdminShell
+      pageTitle="Records History"
+      pageSubtitle="Search, review, and delete saved records"
+      user={user}
+      onLogout={logout}
+    >
       <RecordsPanel />
-      <MobileBottomNav />
-    </main>
+    </AdminShell>
   );
 }

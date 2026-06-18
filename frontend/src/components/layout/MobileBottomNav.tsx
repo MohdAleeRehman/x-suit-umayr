@@ -24,18 +24,18 @@ export function MobileBottomNav() {
   }
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
-      <ul className="mx-auto grid max-w-5xl grid-cols-5 gap-1 px-2 py-2">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-top bg-white md:hidden">
+      <ul className="nav nav-pills nav-justified m-1">
         {navItems.map((item) => {
           const active = pathname === item.href;
           return (
-            <li key={item.href}>
+            <li key={item.href} className="nav-item">
               <Link
                 href={item.href}
-                className={`flex h-11 items-center justify-center rounded-lg text-[11px] font-semibold transition ${
+                className={`nav-link text-xs font-semibold ${
                   active
-                    ? "bg-(--brand) text-white"
-                    : "bg-slate-100 text-(--ink-soft) hover:bg-slate-200"
+                    ? "active bg-danger text-white"
+                    : "text-muted"
                 }`}
               >
                 {item.label}
