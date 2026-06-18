@@ -15,13 +15,13 @@ type Props = {
 
 function SelectFieldBase({ label, value, onChange, options, disabled }: Props) {
   return (
-    <label className="block">
-      <span className="mb-2 block text-sm font-semibold text-foreground">{label}</span>
+    <label className="form-group mb-3 block">
+      <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.05em] text-(--ink-soft)">{label}</span>
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
         disabled={disabled}
-        className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-foreground"
+        className="form-control"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

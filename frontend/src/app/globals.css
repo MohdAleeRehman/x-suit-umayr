@@ -18,22 +18,19 @@
 }
 
 body {
-  background:
-    radial-gradient(circle at 8% 8%, #f9dde0 0%, transparent 33%),
-    radial-gradient(circle at 95% 82%, #dce8f6 0%, transparent 28%),
-    var(--background);
+  background: #f4f6f9;
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
 }
 
 .card {
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 18px 50px rgba(28, 36, 48, 0.12);
+  border-radius: 0.35rem;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .card-header {
-  border-bottom-color: #e2e8f0;
+  border-bottom-color: #dee2e6;
 }
 
 .table thead th {
@@ -86,7 +83,7 @@ button {
   outline: none;
 }
 
-input:focus,
-button:focus {
-  box-shadow: 0 0 0 3px var(--ring);
+.form-control:focus,
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }

@@ -9,12 +9,12 @@ type Props = {
 
 export function FormSection({ title, subtitle, children, className = "" }: Props) {
   return (
-    <section className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_8px_24px_rgba(16,24,40,0.06)] ${className}`}>
-      <div className="mb-4 border-b border-slate-200 pb-2">
-        <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-(--ink-soft)">{title}</p>
-        {subtitle ? <p className="mt-1 text-xs text-(--ink-soft)">{subtitle}</p> : null}
+    <section className={`card card-outline card-secondary mb-3 ${className}`}>
+      <div className="card-header">
+        <h3 className="card-title text-sm font-bold">{title}</h3>
+        {subtitle ? <p className="mb-0 mt-1 text-xs text-(--ink-soft)">{subtitle}</p> : null}
       </div>
-      {children}
+      <div className="card-body">{children}</div>
     </section>
   );
 }

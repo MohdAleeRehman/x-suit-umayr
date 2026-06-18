@@ -6,10 +6,13 @@ type Props = {
 
 export function StatCard({ title, value, subtitle }: Props) {
   return (
-    <article className="card card-outline card-danger rounded-2xl border border-white/60 bg-(--panel) p-5 shadow-[0_10px_30px_rgba(28,36,48,0.08)]">
-      <p className="text-sm text-(--ink-soft)">{title}</p>
-      <h2 className="mt-2 text-xl font-bold text-foreground">{value}</h2>
-      {subtitle ? <p className="mt-1 text-sm text-(--ink-soft)">{subtitle}</p> : null}
+    <article className="info-box shadow-sm">
+      <span className="info-box-icon bg-danger"><i className="fas fa-chart-line" /></span>
+      <div className="info-box-content">
+        <span className="info-box-text text-xs uppercase">{title}</span>
+        <span className="info-box-number">{value}</span>
+        {subtitle ? <span className="text-xs text-(--ink-soft)">{subtitle}</span> : null}
+      </div>
     </article>
   );
 }

@@ -22,8 +22,8 @@ function InputFieldBase({
   disabled,
 }: Props) {
   return (
-    <label className="block">
-      <span className="mb-2 block text-sm font-semibold text-foreground">{label}</span>
+    <label className="form-group mb-3 block">
+      <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.05em] text-(--ink-soft)">{label}</span>
       <input
         type={type}
         value={value}
@@ -32,7 +32,7 @@ function InputFieldBase({
         min={min}
         step={step}
         disabled={disabled}
-        className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-foreground"
+        className="form-control"
       />
     </label>
   );
