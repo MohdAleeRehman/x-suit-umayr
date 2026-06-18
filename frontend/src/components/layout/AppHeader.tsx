@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
@@ -23,21 +24,40 @@ export function AppHeader({ title, subtitle, onLogout }: Props) {
   return (
     <header className="card card-outline card-danger mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-2xl border border-white/60 bg-(--panel) px-4 py-4 shadow-[0_18px_50px_rgba(28,36,48,0.12)] sm:px-5 md:flex-row md:items-center md:justify-between">
       <div className="min-w-0">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
-          X Suite Control
-        </p>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-white">
+            <Image
+              src="/icons/icon-192.svg"
+              alt="X Suite Logo"
+              width={24}
+              height={24}
+              priority
+            />
+          </span>
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
+            X Suite Control
+          </p>
+        </div>
         <h1 className="text-xl font-bold text-foreground sm:text-2xl">{title}</h1>
         <p className="text-xs text-(--ink-soft)">{subtitle}</p>
         {currentIndex >= 0 ? (
-          <div className="mt-2 flex flex-wrap items-center gap-2">
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             {prevPath ? (
-              <Link href={prevPath}>
-                <Button variant="ghost" className="h-8 px-2 text-xs">← Back</Button>
+              <Link
+                href={prevPath}
+                className="inline-flex h-9 items-center justify-center rounded-lg border border-slate-300 bg-white px-3 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
+              >
+                <span aria-hidden="true" className="mr-1">←</span>
+                Back
               </Link>
             ) : null}
             {nextPath ? (
-              <Link href={nextPath}>
-                <Button variant="ghost" className="h-8 px-2 text-xs">Next →</Button>
+              <Link
+                href={nextPath}
+                className="inline-flex h-9 items-center justify-center rounded-lg border border-red-300 bg-red-50 px-3 text-xs font-semibold text-red-700 transition hover:border-red-400 hover:bg-red-100"
+              >
+                Next
+                <span aria-hidden="true" className="ml-1">→</span>
               </Link>
             ) : null}
           </div>
