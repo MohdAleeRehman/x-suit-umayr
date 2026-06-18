@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Syne, JetBrains_Mono } from "next/font/google";
+import { Source_Sans_3, JetBrains_Mono } from "next/font/google";
 import "admin-lte/dist/css/adminlte.min.css";
 import "./globals.css";
 import { PWARegister } from "@/components/pwa/PWARegister";
 
-const syne = Syne({
-  variable: "--font-syne",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
 });
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${jetMono.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${jetMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <PWARegister />

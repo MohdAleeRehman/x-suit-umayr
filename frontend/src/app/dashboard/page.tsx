@@ -16,22 +16,22 @@ export default function DashboardPage() {
     <main className="flex min-h-screen flex-col px-6 py-8 pb-24 md:px-10 md:pb-8">
       <AppHeader title="Dashboard" subtitle="Single superadmin access" onLogout={logout} />
 
-      <section className="mx-auto mt-4 grid w-full max-w-5xl gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto mt-5 hidden w-full max-w-5xl gap-3 md:grid md:grid-cols-2 xl:grid-cols-4">
         <Link href="/sale" className="w-full">
-          <Button className="w-full">Open Sale Module</Button>
+          <Button variant="secondary" className="h-12 w-full">Open Sale Module</Button>
         </Link>
         <Link href="/rent" className="w-full">
-          <Button variant="secondary" className="w-full">Open Rent Module</Button>
+          <Button variant="secondary" className="h-12 w-full">Open Rent Module</Button>
         </Link>
         <Link href="/property" className="w-full">
-          <Button variant="secondary" className="w-full">Open Property Module</Button>
+          <Button variant="secondary" className="h-12 w-full">Open Property Module</Button>
         </Link>
         <Link href="/records" className="w-full">
-          <Button variant="secondary" className="w-full">Open Records History</Button>
+          <Button variant="secondary" className="h-12 w-full">Open Records History</Button>
         </Link>
       </section>
 
-      <section className="mx-auto mt-6 grid w-full max-w-5xl gap-4 md:grid-cols-3">
+      <section className="mx-auto mt-6 grid w-full max-w-5xl gap-4 lg:grid-cols-3">
         <StatCard
           title="Authenticated User"
           value={loading ? "Loading..." : user?.name || "-"}
