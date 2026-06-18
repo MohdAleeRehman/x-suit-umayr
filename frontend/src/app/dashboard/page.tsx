@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Card, SmallBox } from "@adminlte/react";
 import { AdminShell } from "@/components/layout/AdminShell";
 import { StatCard } from "@/components/ui/StatCard";
 import { DashboardCharts } from "@/components/dashboard/DashboardCharts";
@@ -18,52 +18,48 @@ export default function DashboardPage() {
       user={user}
       onLogout={logout}
     >
-      <section className="hidden md:block">
-        <div className="row">
-          <div className="col-xl-3 col-md-6">
-            <Link href="/sale" className="small-box bg-danger">
-              <div className="inner">
-                <h3>Sale</h3>
-                <p>Secondary market model</p>
-              </div>
-              <div className="icon"><i className="fas fa-building" /></div>
-              <span className="small-box-footer">Open module</span>
-            </Link>
+      <section className="mb-3">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
+          <div className="col">
+            <SmallBox
+              title="Sale"
+              text="Secondary market model"
+              theme="danger"
+              icon={<i className="bi bi-building" />}
+              url="/sale"
+            />
           </div>
-          <div className="col-xl-3 col-md-6">
-            <Link href="/rent" className="small-box bg-info">
-              <div className="inner">
-                <h3>Rent</h3>
-                <p>Tenant move-in costs</p>
-              </div>
-              <div className="icon"><i className="fas fa-key" /></div>
-              <span className="small-box-footer">Open module</span>
-            </Link>
+          <div className="col">
+            <SmallBox
+              title="Rent"
+              text="Tenant move-in costs"
+              theme="info"
+              icon={<i className="bi bi-key" />}
+              url="/rent"
+            />
           </div>
-          <div className="col-xl-3 col-md-6">
-            <Link href="/property" className="small-box bg-success">
-              <div className="inner">
-                <h3>Property</h3>
-                <p>Factsheet profile</p>
-              </div>
-              <div className="icon"><i className="fas fa-file-lines" /></div>
-              <span className="small-box-footer">Open module</span>
-            </Link>
+          <div className="col">
+            <SmallBox
+              title="Property"
+              text="Factsheet profile"
+              theme="success"
+              icon={<i className="bi bi-file-earmark-text" />}
+              url="/property"
+            />
           </div>
-          <div className="col-xl-3 col-md-6">
-            <Link href="/records" className="small-box bg-secondary">
-              <div className="inner">
-                <h3>Records</h3>
-                <p>History and quick look</p>
-              </div>
-              <div className="icon"><i className="fas fa-folder-open" /></div>
-              <span className="small-box-footer">Open module</span>
-            </Link>
+          <div className="col">
+            <SmallBox
+              title="Records"
+              text="History and quick look"
+              theme="secondary"
+              icon={<i className="bi bi-folder2-open" />}
+              url="/records"
+            />
           </div>
         </div>
       </section>
 
-      <section className="row mt-1">
+      <section className="row g-3 mb-3">
         <div className="col-lg-4">
         <StatCard
           title="Authenticated User"
@@ -90,7 +86,9 @@ export default function DashboardPage() {
       <DashboardCharts />
 
       {error ? (
-        <div className="alert alert-danger mt-3">{error}</div>
+        <Card title="Error" theme="danger" className="mt-3">
+          <p>{error}</p>
+        </Card>
       ) : null}
     </AdminShell>
   );

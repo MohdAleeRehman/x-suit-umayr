@@ -36,58 +36,59 @@ export function RecordsPanel({ type }: Props) {
   const pageEnd = Math.min(skip + records.length, total);
 
   return (
-    <section className="card card-outline card-danger mx-auto mt-6 w-full max-w-5xl rounded-2xl border border-white/60 bg-(--panel) p-6 shadow-[0_18px_50px_rgba(28,36,48,0.12)]">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-foreground">Saved Records</h2>
-          <p className="text-sm text-(--ink-soft)">Live data from MongoDB records API.</p>
-        </div>
-        <div className="flex w-full flex-wrap gap-2 md:w-auto">
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                search(query);
-              }
-            }}
-            placeholder="Search records..."
-            className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm md:w-64"
-          />
-          <Button
-            variant="secondary"
-            className="flex-1 sm:flex-none"
-            disabled={loading}
-            onClick={() => search(query)}
-          >
-            Search
-          </Button>
-          <Button
-            variant="secondary"
-            className="flex-1 sm:flex-none"
-            disabled={loading}
-            onClick={() => {
-              setQuery("");
-              reload(0);
-            }}
-          >
-            Clear
-          </Button>
-        </div>
+    <section className="card shadow-sm">
+      <div className="card-header">
+        <h3 className="card-title mb-0">Saved Records</h3>
+        <p className="text-muted mb-0 mt-1">Live data from MongoDB records API.</p>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-(--ink-soft)">
-        <p>
-          {searchMode
-            ? `Search results: ${total}`
-            : `Showing ${pageStart}-${pageEnd} of ${total}`}
-        </p>
+      <div className="card-body">
+        <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+          <div className="input-group" style={{ maxWidth: 420 }}>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  search(query);
+                }
+              }}
+              placeholder="Search records..."
+              className="form-control"
+            />
+            <div className="input-group-append">
+              <Button
+                variant="secondary"
+                disabled={loading}
+                onClick={() => search(query)}
+              >
+                Search
+              </Button>
+              <Button
+                variant="secondary"
+                disabled={loading}
+                onClick={() => {
+                  setQuery("");
+                  reload(0);
+                }}
+              >
+                Clear
+              </Button>
+            </div>
+          </div>
+
+          <div className="text-muted" style={{ fontSize: 13 }}>
+            {searchMode
+              ? `Search results: ${total}`
+              : `Showing ${pageStart}-${pageEnd} of ${total}`}
+          </div>
+        </div>
+
         {!searchMode ? (
-          <div className="flex items-center gap-2">
+          <div className="d-flex gap-2 mb-3">
             <Button
               variant="secondary"
-              className="h-9 px-3"
               disabled={loading || skip === 0}
               onClick={prevPage}
             >
@@ -95,7 +96,6 @@ export function RecordsPanel({ type }: Props) {
             </Button>
             <Button
               variant="secondary"
-              className="h-9 px-3"
               disabled={loading || skip + limit >= total}
               onClick={nextPage}
             >
@@ -103,61 +103,58 @@ export function RecordsPanel({ type }: Props) {
             </Button>
           </div>
         ) : null}
-      </div>
 
       {error ? (
-        <p className="mt-4 rounded-lg border border-red-100 bg-red-50 px-4 py-2 text-sm text-red-700">
+        <p className="alert alert-danger py-2">
           {error}
         </p>
       ) : null}
 
       {shareError ? (
-        <p className="mt-4 rounded-lg border border-amber-100 bg-amber-50 px-4 py-2 text-sm text-amber-700">
+        <p className="alert alert-warning py-2">
           {shareError}
         </p>
       ) : null}
 
-      <div className="mt-5 overflow-x-auto">
-        <table className="table w-full min-w-[640px] border-collapse text-sm md:min-w-[700px]">
+      <div className="table-responsive">
+        <table className="table table-hover table-striped table-sm mb-0">
           <thead>
-            <tr className="border-b border-slate-200 text-left text-(--ink-soft)">
-              <th className="pb-2">Title</th>
-              <th className="pb-2">Type</th>
-              <th className="pb-2">Created</th>
-              <th className="pb-2">Actions</th>
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Created</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td className="py-4 text-(--ink-soft)" colSpan={4}>Loading records...</td>
+                <td colSpan={4} className="text-muted py-3">Loading records...</td>
               </tr>
             ) : null}
             {!loading && records.length === 0 ? (
               <tr>
-                <td className="py-4 text-(--ink-soft)" colSpan={4}>No records found.</td>
+                <td colSpan={4} className="text-muted py-3">No records found.</td>
               </tr>
             ) : null}
             {!loading
               ? records.map((record) => (
-                  <tr key={record._id} className="border-b border-slate-100">
-                    <td className="py-3 pr-3 font-medium text-foreground">{record.title}</td>
-                    <td className="py-3 pr-3 uppercase text-(--ink-soft)">{record.type}</td>
-                    <td className="py-3 pr-3 text-(--ink-soft)">
+                  <tr key={record._id}>
+                    <td className="fw-semibold">{record.title}</td>
+                    <td className="text-uppercase text-muted">{record.type}</td>
+                    <td className="text-muted">
                       {new Date(record.createdAt).toLocaleString("en-AE")}
                     </td>
-                    <td className="py-3">
-                      <div className="flex items-center gap-2">
+                    <td>
+                      <div className="d-flex flex-wrap gap-2">
                         <Button
                           variant="secondary"
-                          className="h-9"
                           onClick={() => setQuickLookRecord(record)}
                         >
                           Quick Look
                         </Button>
                         <Button
                           variant="secondary"
-                          className="h-9"
                           disabled={sharingId === record._id}
                           onClick={async () => {
                             try {
@@ -178,7 +175,6 @@ export function RecordsPanel({ type }: Props) {
                         </Button>
                         <Button
                           variant="secondary"
-                          className="h-9"
                           disabled={deletingId === record._id}
                           onClick={async () => {
                             try {
@@ -198,6 +194,7 @@ export function RecordsPanel({ type }: Props) {
               : null}
           </tbody>
         </table>
+      </div>
       </div>
 
       <QuickLookModal record={quickLookRecord} onClose={() => setQuickLookRecord(null)} />

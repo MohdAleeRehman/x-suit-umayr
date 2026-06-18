@@ -24,20 +24,12 @@ export function MobileBottomNav() {
   }
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-top bg-white md:hidden">
-      <ul className="nav nav-pills nav-justified m-1">
+    <nav>
+      <ul>
         {navItems.map((item) => {
-          const active = pathname === item.href;
           return (
-            <li key={item.href} className="nav-item">
-              <Link
-                href={item.href}
-                className={`nav-link text-xs font-semibold ${
-                  active
-                    ? "active bg-danger text-white"
-                    : "text-muted"
-                }`}
-              >
+            <li key={item.href}>
+              <Link href={item.href}>
                 {item.label}
               </Link>
             </li>

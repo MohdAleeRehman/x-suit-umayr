@@ -15,8 +15,8 @@ type Props = {
 
 function SelectFieldBase({ label, value, onChange, options, disabled }: Props) {
   return (
-    <label className="form-group mb-3 block">
-      <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.05em] text-(--ink-soft)">{label}</span>
+    <label className="form-group mb-3 d-block">
+      <span className="d-block mb-1 text-muted" style={{ fontWeight: 600, fontSize: 13 }}>{label}</span>
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}

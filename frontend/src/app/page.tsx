@@ -2,26 +2,24 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-6 py-12">
-      <section className="card card-outline card-danger w-full max-w-2xl rounded-2xl border border-white/60 bg-(--panel) p-10 shadow-[0_20px_70px_rgba(28,36,48,0.12)]">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
-          X Suite Platform
-        </p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground">
-          Real Estate Operations Dashboard
-        </h1>
-        <p className="mt-4 max-w-xl text-sm leading-7 text-(--ink-soft)">
-          Live frontend and backend are connected with single-superadmin access, module records,
-          share-ready PDF exports, and responsive mobile navigation.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/login"
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-(--brand) px-5 text-sm font-semibold text-white transition hover:bg-(--brand-dark)"
-          >
-            Continue To Login
-          </Link>
+    <main className="container-fluid py-5">
+      <section className="row justify-content-center">
+        <div className="col-xl-8 col-lg-9">
+          <div className="card shadow-sm">
+            <div className="card-header border-0">
+              <h3 className="card-title mb-0">X Suite Platform</h3>
+            </div>
+            <div className="card-body py-4">
+              <h1 className="h2 mb-3">Real Estate Operations Dashboard</h1>
+              <p className="text-muted mb-4" style={{ lineHeight: 1.7 }}>
+                Live frontend and backend are connected with single-superadmin access, module records,
+                share-ready PDF exports, and responsive mobile navigation.
+              </p>
+              <Link href="/login" className="btn btn-primary btn-lg">
+                Continue To Login
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </main>

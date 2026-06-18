@@ -4,15 +4,18 @@ type Props = {
   title: string;
   subtitle?: string;
   children: ReactNode;
-  className?: string;
 };
 
-export function FormSection({ title, subtitle, children, className = "" }: Props) {
+export function FormSection({ title, subtitle, children }: Props) {
   return (
-    <section className={`card card-outline card-secondary mb-3 ${className}`}>
-      <div className="card-header">
-        <h3 className="card-title text-sm font-bold">{title}</h3>
-        {subtitle ? <p className="mb-0 mt-1 text-xs text-(--ink-soft)">{subtitle}</p> : null}
+    <section className="card card-outline card-light mb-3 shadow-sm">
+      <div className="card-header d-flex flex-column gap-1">
+        <h3 className="card-title mb-0" style={{ fontSize: 16, lineHeight: 1.3 }}>{title}</h3>
+        {subtitle ? (
+          <p className="text-muted mb-0" style={{ fontSize: 13, lineHeight: 1.4 }}>
+            {subtitle}
+          </p>
+        ) : null}
       </div>
       <div className="card-body">{children}</div>
     </section>

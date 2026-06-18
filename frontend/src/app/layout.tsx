@@ -1,23 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Source_Sans_3, JetBrains_Mono } from "next/font/google";
-import "admin-lte/dist/css/adminlte.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@adminlte/react/css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "quill/dist/quill.snow.css";
+import "flatpickr/dist/flatpickr.min.css";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+import "jsvectormap/dist/jsvectormap.min.css";
 import "./globals.css";
 import { PWARegister } from "@/components/pwa/PWARegister";
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
-  subsets: ["latin"],
-});
-
-const jetMono = JetBrains_Mono({
-  variable: "--font-jet-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "X Suite | Superadmin",
+  title: "Dashboard",
   description: "X Suite Real Estate Dashboard",
   manifest: "/manifest.webmanifest",
   icons: {
@@ -41,15 +35,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${sourceSans.variable} ${jetMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+        />
+      </head>
+      <body>
         <PWARegister />
         {children}
         <Script
-          src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/js/adminlte.min.js"
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
           strategy="afterInteractive"
         />
       </body>

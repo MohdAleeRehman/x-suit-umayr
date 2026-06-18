@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AuthLayout, Card } from "@adminlte/react";
 import { api } from "@/lib/api";
 import { authStore } from "@/lib/auth";
 import { InputField } from "@/components/ui/InputField";
@@ -31,19 +32,11 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-6 py-12">
-      <section className="card card-outline card-danger w-full max-w-md rounded-2xl border border-white/60 bg-(--panel) p-8 shadow-[0_20px_70px_rgba(28,36,48,0.12)]">
-        <p className="mb-2 font-mono text-xs uppercase tracking-[0.16em] text-(--ink-soft)">
-          X Suite
-        </p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Superadmin Login
-        </h1>
-        <p className="mt-2 text-sm text-(--ink-soft)">
-          Single-user secure access for Umair.
-        </p>
+    <AuthLayout authType="login">
+      <Card title="Superadmin Login" theme="primary" className="shadow-sm">
+        <p className="text-muted mb-3">Single-user secure access for Umair.</p>
 
-        <form className="mt-8 space-y-4" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
           <InputField label="Username" value={username} onChange={setUsername} />
           <InputField
             label="Password"
@@ -53,20 +46,18 @@ export default function LoginPage() {
           />
 
           {error ? (
-            <p className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-700">
-              {error}
-            </p>
+            <div className="alert alert-danger py-2">{error}</div>
           ) : null}
 
           <Button
             type="submit"
             disabled={loading}
-            className="h-12 w-full"
+            className="w-100"
           >
             {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
-      </section>
-    </main>
+      </Card>
+    </AuthLayout>
   );
 }

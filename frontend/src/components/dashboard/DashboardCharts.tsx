@@ -78,15 +78,17 @@ export function DashboardCharts() {
   );
 
   return (
-    <section className="row mt-4">
+    <section className="row g-3 mb-3">
       <div className="col-lg-8">
-        <div className="card card-outline card-danger">
-          <div className="card-header">
-            <h3 className="card-title">Records Volume by Module</h3>
+        <div className="card shadow-sm">
+          <div className="card-header border-0">
+            <h3>Records Volume by Module</h3>
           </div>
-          <div className="card-body">
+          <div className="card-body" style={{ minHeight: 300 }}>
             {loading ? (
-              <div className="skeleton h-56 rounded" />
+              <div className="d-flex align-items-center justify-content-center" style={{ minHeight: 240 }}>
+                <div className="spinner-border text-primary" role="status" aria-label="Loading chart" />
+              </div>
             ) : (
               <div style={{ height: 260 }}>
                 <Bar
@@ -104,15 +106,17 @@ export function DashboardCharts() {
         </div>
       </div>
       <div className="col-lg-4">
-        <div className="card card-outline card-secondary">
-          <div className="card-header">
-            <h3 className="card-title">Distribution</h3>
+        <div className="card shadow-sm">
+          <div className="card-header border-0">
+            <h3>Distribution</h3>
           </div>
-          <div className="card-body d-flex justify-content-center">
+          <div className="card-body" style={{ minHeight: 300 }}>
             {loading ? (
-              <div className="skeleton h-56 w-full rounded" />
+              <div className="d-flex align-items-center justify-content-center" style={{ minHeight: 240 }}>
+                <div className="spinner-border text-primary" role="status" aria-label="Loading chart" />
+              </div>
             ) : (
-              <div style={{ height: 230, width: 230 }}>
+              <div style={{ height: 230, width: 230, margin: "0 auto" }}>
                 <Doughnut
                   data={doughnutData}
                   options={{

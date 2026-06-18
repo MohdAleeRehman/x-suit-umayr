@@ -15,43 +15,49 @@ export function QuickLookModal({ record, onClose }: Props) {
   const metrics = buildQuickLook(record);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-4">
-      <div className="card card-outline card-danger w-full max-w-2xl rounded-2xl border border-white/50 bg-(--panel) p-5 shadow-[0_22px_55px_rgba(15,23,42,0.28)]">
-        <div className="mb-4 flex items-start justify-between gap-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-(--ink-soft)">
-              Quick Look
-            </p>
-            <h3 className="mt-1 text-lg font-bold text-foreground">{record.title}</h3>
-            <p className="text-xs text-(--ink-soft)">
-              {record.type.toUpperCase()} • {new Date(record.createdAt).toLocaleString("en-AE")}
-            </p>
-          </div>
-          <Button variant="secondary" className="h-9" onClick={onClose}>Close</Button>
-        </div>
-
-        <div className="grid gap-3 md:grid-cols-3">
-          {metrics.primary.map((m) => (
-            <div key={m.label} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <p className="text-xs text-(--ink-soft)">{m.label}</p>
-              <p className="mt-1 text-sm font-bold text-foreground">{m.value}</p>
+    <>
+      <div className="modal-backdrop show" onClick={onClose} />
+      <div className="modal show d-block" tabIndex={-1} role="dialog" aria-modal="true">
+        <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div>
+                <h5 className="modal-title">{record.title}</h5>
+                <small className="text-muted">
+                  {record.type.toUpperCase()} | {new Date(record.createdAt).toLocaleString("en-AE")}
+                </small>
+              </div>
+              <Button variant="secondary" onClick={onClose}>Close</Button>
             </div>
-          ))}
-        </div>
 
-        <div className="mt-4 rounded-xl border border-slate-200">
-          <table className="table w-full text-sm">
-            <tbody>
-              {metrics.breakdown.map((row) => (
-                <tr key={row.label} className="border-b border-slate-100 last:border-b-0">
-                  <td className="px-3 py-2 font-semibold text-(--ink-soft)">{row.label}</td>
-                  <td className="px-3 py-2 text-right text-foreground">{row.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            <div className="modal-body">
+              <div className="row g-2 mb-3">
+                {metrics.primary.map((m) => (
+                  <div key={m.label} className="col-md-4">
+                    <div className="card card-body p-2">
+                      <div>
+                        <span className="d-block text-muted" style={{ fontSize: 12 }}>{m.label}</span>
+                        <span className="d-block fw-semibold">{m.value}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <table className="table table-sm table-striped mb-0">
+                <tbody>
+                  {metrics.breakdown.map((row) => (
+                    <tr key={row.label}>
+                      <td className="text-muted fw-semibold">{row.label}</td>
+                      <td>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

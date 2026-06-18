@@ -1,13 +1,6 @@
-const CACHE_NAME = "x-suite-v1";
+const CACHE_NAME = "x-suite-static-v2";
 const OFFLINE_URL = "/offline";
 const PRECACHE_URLS = [
-  "/",
-  "/login",
-  "/dashboard",
-  "/sale",
-  "/rent",
-  "/property",
-  "/records",
   OFFLINE_URL,
   "/manifest.webmanifest",
   "/icons/icon-192.svg",
@@ -40,18 +33,21 @@ self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
     event.respondWith(
       fetch(event.request)
-        .then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-          return response;
-        })
+        .then((response) => response)
         .catch(async () => {
           const cache = await caches.open(CACHE_NAME);
-          return (await cache.match(event.request)) || (await cache.match(OFFLINE_URL));
+          return (await cache.match(OFFLINE_URL));
         })
     );
+    return;
+  }
+
+  const isStaticAsset =
+    requestUrl.pathname.startsWith("/_next/") ||
+    ["style", "script", "image", "font"].includes(event.request.destination);
+
+  if (!isStaticAsset) {
+    event.respondWith(fetch(event.request));
     return;
   }
 
